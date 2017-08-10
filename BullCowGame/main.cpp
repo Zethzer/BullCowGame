@@ -5,6 +5,7 @@
  */
 #include <iostream>
 #include <string>
+#include <time.h>
 
 #include "FBullCowGame.h"
 
@@ -44,6 +45,9 @@ int main()
  */
 void PrintIntro()
 {
+	constexpr int32 MIN_LENGTH = 3;
+	constexpr int32 MAX_LENGTH = 6;
+
 	FText Response = "";
 	int32 Length = 0;
 
@@ -66,6 +70,12 @@ void PrintIntro()
 			std::cout << "What is the length you want (3-6) ? ";
 			std::cin >> Length;
 		} while (Length < 3 && Length > 6);
+	}
+	else
+	{
+		// Random between 3 and 6 (inclusive)
+		srand((unsigned int)time(NULL));
+		Length = rand() % (MAX_LENGTH - MIN_LENGTH + 1) + MIN_LENGTH;
 	}
 
 	BCGame.Reset(Length);
